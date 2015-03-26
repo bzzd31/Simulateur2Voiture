@@ -58,7 +58,7 @@ public class IHMVoiture extends JFrame implements Observer{
         int yMetres = maVoiture.getPositionEnY();
 		int xPixel = calculerPositionPixels(xMetres);
         int yPixel = calculerPositionPixels(yMetres);
-		contexteGraphique.fillRect(xPixel, yPixel, 15, 7);
+		contexteGraphique.fillOval(xPixel, yPixel, 15, 15);
 	}
 	
 }
