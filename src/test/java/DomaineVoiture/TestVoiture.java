@@ -28,7 +28,7 @@ public class TestVoiture {
 		
 		maVoiture.accelerer();
 		
-		assertEquals(20, maVoiture.getVitesse());
+		assertEquals(20, maVoiture.getVitesseMetreSeconde());
 	}
 	
 	@Test
@@ -36,7 +36,7 @@ public class TestVoiture {
 		
 		maVoiture.setVitesse(100);
 		maVoiture.accelerer();
-		assertEquals(100, maVoiture.getVitesse());
+		assertEquals(100, maVoiture.getVitesseMetreSeconde());
 		
 	}
 
@@ -77,5 +77,33 @@ public class TestVoiture {
 		assertEquals(0, maVoiture.getPositionEnX());
 		
 	}
+    @Test
+    public void testBase2D() {
+        maVoiture = new Voiture(0,0,100);
+        maVoiture.setDirection(0);
+        maVoiture.miseAJourPosition();
+        assertEquals(100, maVoiture.getPositionEnX());
+
+    }
+
+    @Test
+    public void testDirection90Degrees() {
+        maVoiture = new Voiture(0,100,10);
+        maVoiture.setDirection(90);
+        maVoiture.miseAJourPosition();
+        assertEquals(90, maVoiture.getPositionEnY());
+
+    }
+
+    @Test
+    public void testDirection30Degrees() {
+        maVoiture = new Voiture(0,100,100);
+        maVoiture.setDirection(30);
+        maVoiture.miseAJourPosition();
+        assertEquals(86, maVoiture.getPositionEnX());
+        assertEquals(51, maVoiture.getPositionEnY());
+
+    }
+
 	
 }

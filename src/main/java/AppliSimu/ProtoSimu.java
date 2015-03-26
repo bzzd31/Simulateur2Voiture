@@ -13,11 +13,10 @@ public class ProtoSimu {
 
 	public static void main(String[] args) {
 
-		final Voiture maVoiture = new Voiture (100, 500, 5);
+		final Voiture maVoiture = new Voiture (100, 500, 100);
 		IHMVoiture monTriangle = new IHMVoiture(maVoiture);
 		
 		Timer timerAvancer = new Timer(dureeUneSecondeEnMilliSecondes, new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				maVoiture.miseAJourPosition();
@@ -26,7 +25,8 @@ public class ProtoSimu {
 		
 		timerAvancer.start();
 		
-		while(true){
+		while(true) {
+
 		}
 
 	}

@@ -9,7 +9,7 @@ public class Voiture extends Observable {
 	private int vitesseMetreSeconde;
 	private int directionEnDegres;
 
-	public Voiture(int positionEnX, int positionEnY, int vitesse) {
+    public Voiture(int positionEnX, int positionEnY, int vitesse) {
 		this.positionEnX = positionEnX;
 		this.positionEnY = positionEnY;
 		this.vitesseMetreSeconde = vitesse;
@@ -22,34 +22,24 @@ public class Voiture extends Observable {
 		notificationObservateur();
 	}
 
-	private void miseAJourPositionX() {
-		if (directionEnDegres <= 90)
-			positionEnX += (vitesseMetreSeconde * (1-(directionEnDegres/90.0)));
-		else if (directionEnDegres <= 180)
-            positionEnX -= (vitesseMetreSeconde * ((directionEnDegres - 90.0)/90.0));
-        else if (directionEnDegres <= 270)
-            positionEnX -= (vitesseMetreSeconde * (1-((directionEnDegres - 180.0)/90.0)));
-        else
-            positionEnX += vitesseMetreSeconde * ((directionEnDegres - 270.0) / 90.0);
-		if (positionEnX > 1000)
-			positionEnX = 1000;
-		else if (positionEnX < 0)
-			positionEnX = 0;
-	}
+    private void miseAJourPositionX() {
+        Double angle = Math.toRadians(directionEnDegres);
+        positionEnX +=(int)(vitesseMetreSeconde * Math.cos(angle));
+        if (positionEnX > 1000) {
+            positionEnX = 1000;
+        } else if (positionEnX < 0) {
+            positionEnX = 0;
+        }
+    }
 
     private void miseAJourPositionY() {
-        if (directionEnDegres <= 90)
-            positionEnY -= (vitesseMetreSeconde * (directionEnDegres/90.0));
-        else if (directionEnDegres <= 180)
-            positionEnY -= (vitesseMetreSeconde * (1-(directionEnDegres - 90.0)/90.0));
-        else if (directionEnDegres <= 270)
-            positionEnY += (vitesseMetreSeconde * ((directionEnDegres - 180.0)/90.0));
-        else
-            positionEnY += (vitesseMetreSeconde * (1-(directionEnDegres - 270.0)/90.0));
-        if (positionEnY > 1000)
+        Double angle =  Math.toRadians(directionEnDegres);
+        positionEnY -= (int) (vitesseMetreSeconde * Math.sin(angle));
+        if (positionEnY > 1000) {
             positionEnY = 1000;
-        else if (positionEnY < 0)
+        } else if (positionEnY < 0) {
             positionEnY = 0;
+        }
     }
 
 	private void notificationObservateur() {
@@ -58,8 +48,9 @@ public class Voiture extends Observable {
 	}
 
 	public void accelerer() {
-		if (vitesseMetreSeconde < 100)
-			vitesseMetreSeconde += 10;	
+		if (vitesseMetreSeconde < 100) {
+            vitesseMetreSeconde += 10;
+        }
 	}
 
     public void inverserDirection() {
@@ -75,8 +66,9 @@ public class Voiture extends Observable {
 
     public void tournerDroite() {
         directionEnDegres -= 10;
-        if (directionEnDegres < 0)
+        if (directionEnDegres < 0) {
             directionEnDegres = 350;
+        }
         directionEnDegres = directionEnDegres % 360;
     }
 
@@ -88,19 +80,19 @@ public class Voiture extends Observable {
         return positionEnY;
     }
 
-    public Object getVitesse() {
-		return vitesseMetreSeconde;
-	}
+    public int getVitesseMetreSeconde() {
+        return vitesseMetreSeconde;
+    }
 
-	public void setVitesse(int vitesse) {
-		vitesseMetreSeconde = vitesse;
-	}
+    public int getDirection() {
+        return directionEnDegres;
+    }
 
-	public Object getDirection() {
-	    return directionEnDegres;
-	}
+    public void setVitesse(int vitesse) {
+        this.vitesseMetreSeconde = vitesse;
+    }
 
-    public void setDirection(int angleDirection) {
-        this.directionEnDegres = angleDirection;
+    public void setDirection(int direction) {
+        this.directionEnDegres = direction;
     }
 }
